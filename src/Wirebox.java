@@ -20,6 +20,7 @@ public class Wirebox implements Wireframe {
     private static int edgeThreshold = 5;
     private static int cornerThreshold = 10;
     private Color lineColor = Color.BLACK;
+    private Font font = new Font("Arial", Font.PLAIN, 12);
 
 
     public Wirebox(String name, int x, int y, int width, int height){
@@ -92,6 +93,7 @@ public class Wirebox implements Wireframe {
     public void draw(Graphics2D g, boolean export) {
         Filler.fill(fillType,x,y,width,height,g);
         g.setColor(lineColor);
+        g.setFont(font);
         g.setStroke(new BasicStroke(1));
         g.drawRect(x,y,width, height);
         if(!export){

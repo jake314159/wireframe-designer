@@ -64,8 +64,9 @@ public class DrawPanel extends JPanel{
         }
     }
 
-    public void addWireframe(Wirebox wirebox) {
+    public void addWireframe(Wireframe wirebox) {
         wireFrames.add(wirebox);
+        repaint();
     }
 
     public void setSettingsPanel(SettingsPanel sp){
