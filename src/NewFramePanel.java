@@ -84,7 +84,7 @@ public class NewFramePanel extends JPanel{
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fcImg.getSelectedFile();
                     System.out.println("Saving at "+file.getName());
-                    drawPanel.export(file.getAbsolutePath()+".png");
+                    drawPanel.export(file.getAbsolutePath() + ".png");
                 } else {
                     //log.append("Save command cancelled by user." + newline);
                 }
@@ -93,6 +93,21 @@ public class NewFramePanel extends JPanel{
             }
         });
         this.add(exportButton);
+
+        this.add(new JLabel("WARNING"));
+        this.add(new JLabel("THE NEXT"));
+        this.add(new JLabel("BUTTON"));
+        this.add(new JLabel("WILL DELETE"));
+        this.add(new JLabel("EVERYTHING:"));
+
+        JButton newButton = new JButton("New");
+        newButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                drawPanel.clear();
+            }
+        });
+        this.add(newButton);
 
     }
 }

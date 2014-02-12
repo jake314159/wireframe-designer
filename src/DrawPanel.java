@@ -92,6 +92,12 @@ public class DrawPanel extends JPanel{
         return true;
     }
 
+    //Deletes everything (with no undo!)
+    public void clear(){
+        wireFrames.clear();
+        repaint();
+    }
+
     public void export(String exportFile){
         //FileUtil.saveAsImage(wireFrames, 0,0,getWidth(), getHeight(), "output.png");
         exportMode = true;
