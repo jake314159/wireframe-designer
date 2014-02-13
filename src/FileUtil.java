@@ -64,4 +64,10 @@ public class FileUtil {
     }
 
 
+    //Returns the file extention if it has one or null if not
+    public static String getFileExtension(String filename){
+        int lastDot = filename.lastIndexOf(".");
+        if(lastDot == -1 ) return null;
+        return filename.substring(lastDot+1);
+    }
 }

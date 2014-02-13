@@ -60,7 +60,7 @@ public class DrawPanel extends JPanel{
                     exportSelectEnd.getX() - exportSelectStart.getX(),
                     exportSelectEnd.getY() - exportSelectStart.getY()
             );
-            System.out.println("Drag when exporting");
+            //System.out.println("Drag when exporting");
         }
     }
 

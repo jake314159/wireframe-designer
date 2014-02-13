@@ -55,8 +55,14 @@ public class NewFramePanel extends JPanel{
                     File file = fc.getSelectedFile();
                     //This is where a real application would save the file.
                    // log.append("Saving: " + file.getName() + "." + newline);
-                    System.out.println("Saving at "+file.getName());
-                    drawPanel.save(file.getAbsolutePath()+".wfd");
+                    //System.out.println("Saving at "+file.getName());
+                    String ext =  FileUtil.getFileExtension(file.getAbsolutePath());
+                    if(ext!=null && ext.equals("wfd")){
+                        drawPanel.save(file.getAbsolutePath());
+                    }else{
+                        drawPanel.save(file.getAbsolutePath()+".wfd");
+                    }
+
                 } else {
                     //log.append("Save command cancelled by user." + newline);
                 }
@@ -93,7 +99,13 @@ public class NewFramePanel extends JPanel{
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fcImg.getSelectedFile();
                     System.out.println("Saving at "+file.getName());
-                    drawPanel.export(file.getAbsolutePath() + ".png");
+                    //drawPanel.export(file.getAbsolutePath() + ".png");
+                    String ext =  FileUtil.getFileExtension(file.getAbsolutePath());
+                    if(ext!=null && ext.equals("png")){
+                        drawPanel.export(file.getAbsolutePath());
+                    }else{
+                        drawPanel.export(file.getAbsolutePath() + ".png");
+                    }
                 } else {
                     //log.append("Save command cancelled by user." + newline);
                 }

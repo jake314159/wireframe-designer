@@ -36,7 +36,7 @@ public class Filler {
             g.setColor(Color.LIGHT_GRAY);
             int numOfBoxes = 5;
             int boxWidth = (width - margin - margin)/numOfBoxes;
-            System.out.println("box width "+boxWidth+" of "+width);
+            //System.out.println("box width "+boxWidth+" of "+width);
             for(int i=0; i<numOfBoxes; i++){
                 g.fillRect(x+margin+(i*boxWidth), y+height-(margin)-(barY*(i+1)), boxWidth, (barY*(i+1)));
             }
