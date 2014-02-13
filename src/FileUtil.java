@@ -26,9 +26,11 @@ public class FileUtil {
                 String[] arr = sCurrentLine.split(",");
                 System.out.println("The line '" + sCurrentLine + "' is " + arr.length + " long");
                 try{
-                if(arr[0].equals("Wirebox")){
-                    array.add(Wirebox.makeWireframe(arr));
-                }
+                    if(arr[0].equals("Wirebox")){
+                        array.add(Wirebox.makeWireframe(arr));
+                    } if(arr[0].equals("Label")){
+                        array.add(Label.makeWireframe(arr));
+                    }
                 }catch(NullPointerException e){
                     e.printStackTrace();
                 }

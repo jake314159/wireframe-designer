@@ -97,7 +97,7 @@ public class Label implements Wireframe{
 
     @Override
     public String getSaveString() {
-        return getFillType() +","+
+        return getTypeOfWireframe() +","+
                 name;
     }
     public static Label makeWireframe(String[] args){
