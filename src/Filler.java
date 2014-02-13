@@ -4,7 +4,8 @@ import java.util.Random;
 public class Filler {
 
     private static final String[] fillOptions =
-            new String[]{"None","White","Checkboxes","Button list","Button row","Empty axis","Bar chart","Line chart strait"};
+            new String[]{"None","White","Checkboxes","Button list","Button row","Empty axis","Bar chart",
+                    "Line chart strait","Fill"};
     private static Random rand = new Random();
 
     public static String[] getFillOptions(){
@@ -14,9 +15,14 @@ public class Filler {
     public static void fill(String option, int x, int y, int width, int height, Graphics2D g){
         if(option.equals("None")){
             return; //do nothing
-        }else if(option.equals("White")){
-            g.setColor(Color.WHITE);
+        }else if(option.substring(0,4).equals("Fill")){
+            if(option.length() <10) return; //Not compleate
+            g.setColor(Color.decode(option.substring(4,11)));
             g.fillRect(x,y,width,height);
+        }else if(option.equals("White")){
+            //g.setColor(Color.WHITE);
+            //g.fillRect(x,y,width,height);
+            fill("Fill#FFFFFF",x,y,width, height, g);
         }else if(option.equals("Bar chart")){
 
             int margin = width/10;

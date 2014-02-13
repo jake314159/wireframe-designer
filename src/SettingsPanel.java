@@ -13,9 +13,13 @@ public class SettingsPanel extends JPanel{
     private JLabel displayNameLabel = new JLabel("Display name:");
     private JCheckBox displayNameCheckbox = new JCheckBox();
     private JComboBox fillList = new JComboBox(Filler.getFillOptions());
+    private JButton selectFillColorButton = new JButton("Select color");
 
     private JLabel sizeLabel = new JLabel("Size:");
     private JTextField fontSizeBox = new JTextField(10);
+
+
+    private Color selectedColor = Color.WHITE;
 
     public SettingsPanel(DrawPanel drawPanel){
         this.drawPanel = drawPanel;
@@ -103,12 +107,29 @@ public class SettingsPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if(wireframe!=null){
-                    wireframe.setFillType((String)fillList.getSelectedItem());
+                    String fillType = (String)fillList.getSelectedItem();
+                    if(fillType.equals("Fill")){
+                        wireframe.setFillType("Fill"+String.format("#%02x%02x%02x", selectedColor.getRed(),
+                                selectedColor.getGreen(), selectedColor.getBlue()));
+                    }else{
+                        wireframe.setFillType(fillType);
+                    }
                     drawPanel.repaint();
                 }
             }
         });
         this.add(fillList);
+
+        selectFillColorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                selectedColor = JColorChooser.showDialog(
+                        SettingsPanel.this,
+                        "Choose Background Color",
+                        selectedColor);
+            }
+        });
+        this.add(selectFillColorButton);
 
         this.add(sizeLabel);
         this.add(fontSizeBox);
