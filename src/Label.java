@@ -7,10 +7,11 @@ public class Label implements Wireframe{
     private int y = 10;
     private int sensitivity = 10; //How easy to pick up
     private Color textColor = Color.BLACK;
-    private Font font = new Font("Arial", Font.PLAIN, 22);
+    private Font font;
 
     public Label(String name){
         this.name = name;
+        setSize(22); //sets the default font size
     }
 
     @Override
@@ -22,6 +23,19 @@ public class Label implements Wireframe{
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setLocation(int x, int y){
+        this.x = x;
+        this.y=y;
+    }
+
+    public void setSize(int size){
+        font = new Font("Arial", Font.PLAIN, size);
+    }
+    public int getSize(){
+        return font.getSize();
+    }
+
 
     @Override
     public String getTypeOfWireframe() {
@@ -57,7 +71,7 @@ public class Label implements Wireframe{
     public void draw(Graphics2D g, boolean export) {
         g.setColor(textColor);
         g.setFont(font);
-        g.drawString(name, x, y+22);
+        g.drawString(name, x, y+font.getSize());
         if(!export){
             g.fillRect(x-5,y-5,10,10);
         }
@@ -98,10 +112,19 @@ public class Label implements Wireframe{
     @Override
     public String getSaveString() {
         return getTypeOfWireframe() +","+
+                x +","+
+                y +","+
+                getSize() +","+
                 name;
     }
     public static Label makeWireframe(String[] args){
-        return new Label(args[1]);
+        Label returnLabel = new Label(args[4]);
+        int x = Integer.parseInt(args[1]);
+        int y = Integer.parseInt(args[2]);
+        int size = Integer.parseInt(args[3]);
+        returnLabel.setLocation(x,y);
+        returnLabel.setSize(size);
+        return returnLabel;
     }
 
     @Override
