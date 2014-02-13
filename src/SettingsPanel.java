@@ -10,8 +10,12 @@ public class SettingsPanel extends JPanel{
     private DrawPanel drawPanel;
 
     private JTextField nameTextBox = new JTextField(10);
+    private JLabel displayNameLabel = new JLabel("Display name:");
     private JCheckBox displayNameCheckbox = new JCheckBox();
     private JComboBox fillList = new JComboBox(Filler.getFillOptions());
+
+    private JLabel sizeLabel = new JLabel("Size:");
+    private JTextField fontSizeBox = new JTextField(10);
 
     public SettingsPanel(DrawPanel drawPanel){
         this.drawPanel = drawPanel;
@@ -32,6 +36,21 @@ public class SettingsPanel extends JPanel{
                 //error option not avalible :/
                 fillList.setSelectedIndex(0);
             }
+            if(wireframe.getTypeOfWireframe().equals("Label")){
+                sizeLabel.setVisible(true);
+                fontSizeBox.setVisible(true);
+                fillList.setVisible(false);
+                displayNameCheckbox.setVisible(false);
+                displayNameLabel.setVisible(false);
+                fontSizeBox.setText(""+((Label)wireframe).getSize());
+            }else{
+                sizeLabel.setVisible(false);
+                fontSizeBox.setVisible(false);
+                fillList.setVisible(true);
+                displayNameLabel.setVisible(true);
+                displayNameCheckbox.setVisible(true);
+            }
+
             this.wireframe = wireframe;
         } else {
             this.wireframe = wireframe;
@@ -69,7 +88,7 @@ public class SettingsPanel extends JPanel{
             }
         });
 
-        this.add(new JLabel("Display name:"));
+        this.add(displayNameLabel);
         this.add(displayNameCheckbox);
         displayNameCheckbox.addActionListener(new ActionListener() {
             @Override
@@ -90,6 +109,27 @@ public class SettingsPanel extends JPanel{
             }
         });
         this.add(fillList);
+
+        this.add(sizeLabel);
+        this.add(fontSizeBox);
+        fontSizeBox.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent keyEvent) {}
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {}
+            @Override
+            public void keyReleased(KeyEvent keyEvent) {
+                if(wireframe.getTypeOfWireframe().equals("Label")){
+                    try{
+                        int size = Integer.parseInt(fontSizeBox.getText());
+                        ((Label)wireframe).setSize(size);
+                        drawPanel.repaint();
+                    } catch (Exception e){
+                        System.out.println("NOT A VALID SIZE ENTRY");
+                    }
+                }
+            }
+        });
 
         JButton toTopButton = new JButton("Bring to top");
         toTopButton.addActionListener(new ActionListener() {
