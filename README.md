@@ -7,8 +7,8 @@ A very very basic wireframe design tool.
 Features
 --------
 + Multiple wireframe boxes
-+ Text titles
-+ (Simple) Background images
++ Text labels
++ (Simple) Background designs & colours
 + PNG export
 
 
