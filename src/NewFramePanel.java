@@ -3,14 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jake
- * Date: 12/02/14
- * Time: 18:23
- * To change this template use File | Settings | File Templates.
- */
 public class NewFramePanel extends JPanel{
 
     DrawPanel drawPanel = new DrawPanel(); //Where to add the new frames
@@ -24,7 +18,16 @@ public class NewFramePanel extends JPanel{
 
         this.add(new JLabel("Draw options:"));
 
-        JButton wireboxButton = new JButton("Wirebox");
+        JButton wireboxButton = new JButton("");
+        //wireboxButton.setSize(50,50);
+        wireboxButton.setMargin(new Insets(2, 2, 2, 2));
+        try {
+            //System.out.println("ICON "+R.R.getIcon("wirebox"));
+            wireboxButton.setIcon(R.R.getIcon("wirebox"));
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            wireboxButton.setText("Wirebox");
+        }
         wireboxButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -34,7 +37,16 @@ public class NewFramePanel extends JPanel{
         });
         this.add(wireboxButton);
 
-        JButton labelButton = new JButton("Label");
+
+        JButton labelButton = new JButton("");
+        try {
+            //System.out.println("ICON "+R.R.getIcon("wirebox"));
+            labelButton.setIcon(R.R.getIcon("label"));
+            labelButton.setMargin(new Insets(2, 2, 2, 2));
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            labelButton.setText("Label");
+        }
         labelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -43,7 +55,15 @@ public class NewFramePanel extends JPanel{
         });
         this.add(labelButton);
 
-        JButton pointerButton = new JButton("Pointer");
+        JButton pointerButton = new JButton("");
+        try {
+            //System.out.println("ICON "+R.R.getIcon("wirebox"));
+            pointerButton.setIcon(R.R.getIcon("pointer"));
+            pointerButton.setMargin(new Insets(2, 2, 2, 2));
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            pointerButton.setText("Pointer");
+        }
         pointerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
