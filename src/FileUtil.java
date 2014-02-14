@@ -28,8 +28,10 @@ public class FileUtil {
                 try{
                     if(arr[0].equals("Wirebox")){
                         array.add(Wirebox.makeWireframe(arr));
-                    } if(arr[0].equals("Label")){
+                    } else if(arr[0].equals("Label")){
                         array.add(Label.makeWireframe(arr));
+                    } else if(arr[0].equals("Pointer")){
+                        array.add(Pointer.makeWireframe(arr));
                     }
                 }catch(NullPointerException e){
                     e.printStackTrace();

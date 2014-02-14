@@ -43,6 +43,15 @@ public class NewFramePanel extends JPanel{
         });
         this.add(labelButton);
 
+        JButton pointerButton = new JButton("Pointer");
+        pointerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                drawPanel.addWireframe(new Pointer("Pointer 1"));
+            }
+        });
+        this.add(pointerButton);
+
         this.add(new JLabel("Save options:"));
 
         JButton saveButton = new JButton("Save");
