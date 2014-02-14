@@ -8,18 +8,17 @@ Features
 --------
 + Multiple wireframe boxes
 + Text labels
-+ (Simple) Background designs & colours
++ Background designs & colours
 + PNG export
 
 
 Features still to do
 -----------
 + More types of box (post-it?)
-+ Resize from any square
++ Resize from any corner
 + Move from clicking inside box
 + Scroll around larger workspace
 + Tabs for multiple open files
-+ Labels (with arrows)
 + Lots more
 
 
@@ -31,7 +30,7 @@ Bugs
 
 A word of warning to users
 ----------------------------
-This is far from compleate, use at your own risk.
+This is far from complete, use at your own risk.
 
 
 A word of warning to developers
