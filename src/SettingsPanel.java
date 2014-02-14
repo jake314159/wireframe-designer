@@ -57,6 +57,14 @@ public class SettingsPanel extends JPanel{
                 displayNameCheckbox.setVisible(true);
             }
 
+            if(wireframe.getTypeOfWireframe().equals("Pointer")){
+                multilineTextEntry.setVisible(true);
+                nameTextBox.setVisible(false);
+            }else{
+                multilineTextEntry.setVisible(false);
+                nameTextBox.setVisible(true);
+            }
+
             this.wireframe = wireframe;
         } else {
             this.wireframe = wireframe;
@@ -109,6 +117,7 @@ public class SettingsPanel extends JPanel{
                 }
             }
         });
+        multilineTextEntry.setVisible(false);
         this.add(multilineTextEntry);
 
         this.add(displayNameLabel);

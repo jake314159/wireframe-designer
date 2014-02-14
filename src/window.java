@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FilenameFilter;
 
 
 public class window extends JFrame{
@@ -74,10 +75,13 @@ public class window extends JFrame{
 
         menuItem = new JMenuItem("Save", KeyEvent.VK_S); //R.R.getIcon("label"));
         menuItem.getAccessibleContext().setAccessibleDescription("Save wireframe");
+        final window thisWindow = this;
+        final FileDialog fdSave = new FileDialog(this, "Choose a file", FileDialog.SAVE);
+        fdSave.setFile("*.wfd");
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("SAVE");
+                /*System.out.println("SAVE");
                 int returnVal = fc.showSaveDialog(window.this);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fc.getSelectedFile();
@@ -91,23 +95,55 @@ public class window extends JFrame{
                         drawPanel.save(file.getAbsolutePath()+".wfd");
                     }
 
+                } */
+                fdSave.setVisible(true);
+                fdSave.toFront();
+                fdSave.repaint();
+                String filename;
+                try{
+                    filename = fdSave.getFiles()[0].getAbsolutePath();
+                }catch(Exception e){return;}
+                if (filename != null){
+                    String ext =  FileUtil.getFileExtension(filename);
+                    if(ext!=null && ext.equals("wfd")){
+                        drawPanel.save(filename);
+                    }else{
+                        drawPanel.save(filename+".wfd");
+                    }
                 }
+
             }
         });
         menu.add(menuItem);
 
         menuItem = new JMenuItem("Load", KeyEvent.VK_L); //R.R.getIcon("label"));
         menuItem.getAccessibleContext().setAccessibleDescription("Load wireframe");
+        final FileDialog fdLoad = new FileDialog(this, "Choose a file", FileDialog.LOAD);
+        fdLoad.setFile("*.wfd");
+        fdLoad.setFilenameFilter(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".wfd");
+            }
+        });
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                int returnVal = fc.showOpenDialog(window.this);
+                /*int returnVal = fc.showOpenDialog(window.this);
 
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fc.getSelectedFile();
                     drawPanel.load(file.getAbsolutePath());
                 } else {
-                }
+                }         */
+                fdLoad.setVisible(true);
+                String filename;
+                try{
+                    filename = fdLoad.getFiles()[0].getAbsolutePath();
+                }catch(Exception e) {return;}
+                if (filename != null)
+                    drawPanel.load(filename);
+
+
             }
         });
         menu.add(menuItem);

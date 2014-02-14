@@ -24,7 +24,6 @@ Features still to do
 
 Bugs
 --------
-+ New box bar should be icon buttons only
 + Settings bar not well formatted
 
 
