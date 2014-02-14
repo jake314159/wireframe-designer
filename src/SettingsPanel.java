@@ -18,6 +18,7 @@ public class SettingsPanel extends JPanel{
     private JLabel sizeLabel = new JLabel("Size:");
     private JTextField fontSizeBox = new JTextField(10);
 
+    private JTextArea multilineTextEntry = new JTextArea(3,10);
 
     private Color selectedColor = Color.WHITE;
 
@@ -30,6 +31,7 @@ public class SettingsPanel extends JPanel{
         if(wireframe != null){
             this.wireframe = null;
             nameTextBox.setText(wireframe.getName());
+            multilineTextEntry.setText(wireframe.getName());
             displayNameCheckbox.setSelected(wireframe.drawName());
             for(int i=0; i<Filler.getFillOptions().length; i++){
                 System.out.println("Checking if " + wireframe.getFillType() + " equals " + fillList.getItemAt(i));
@@ -59,6 +61,7 @@ public class SettingsPanel extends JPanel{
         } else {
             this.wireframe = wireframe;
             nameTextBox.setText("");
+            multilineTextEntry.setText("");
             displayNameCheckbox.setSelected(false);
         }
         if(drawPanel != null) drawPanel.repaint();
@@ -86,11 +89,27 @@ public class SettingsPanel extends JPanel{
             @Override
             public void keyReleased(KeyEvent keyEvent) {
                 if(wireframe != null){
-                    wireframe.setName(nameTextBox.getText().replace(",", ""));
+                    wireframe.setName(nameTextBox.getText().replaceAll(",", ""));
                     if(drawPanel != null) drawPanel.repaint();
                 }
             }
         });
+
+
+        multilineTextEntry.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent keyEvent) {}
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {}
+            @Override
+            public void keyReleased(KeyEvent keyEvent) {
+                if(wireframe != null){
+                    wireframe.setName(multilineTextEntry.getText().replaceAll(",", ""));
+                    if(drawPanel != null) drawPanel.repaint();
+                }
+            }
+        });
+        this.add(multilineTextEntry);
 
         this.add(displayNameLabel);
         this.add(displayNameCheckbox);

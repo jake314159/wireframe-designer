@@ -85,16 +85,26 @@ public class Pointer implements Wireframe{
     public void draw(Graphics2D g, boolean export) {
         g.setColor(textColor);
         g.setFont(font);
-        g.drawString(name, textX, textY+font.getSize());
+        int stringWidth = 0;
+        if(name.indexOf("\n") >0){  //Note ignores leading new lines
+            String[] lines = name.split("\n");
+            stringWidth = (g.getFontMetrics(font).stringWidth(lines[0]));
+            for(int i=0; i<lines.length;i++){
+                g.drawString(lines[i], textX, textY+font.getSize()*(i+1));
+            }
+        }else{
+            stringWidth = (g.getFontMetrics(font).stringWidth(name));
+            g.drawString(name, textX, textY+font.getSize());
+        }
         if(!export){
             g.fillRect(textX-5,textY-5,10,10);
         }
-        if(pointX < textX+ ((g.getFontMetrics(font).stringWidth(name))/2)){
+        if(pointX < textX+ (stringWidth/2)){
             //Line going off to left
             g.drawLine(textX-5,textY+(font.getSize()/2),pointX,pointY);
         }else{
             //Line going off to right
-            g.drawLine(textX+5+g.getFontMetrics(font).stringWidth(name),textY+(font.getSize()/2),pointX,pointY);
+            g.drawLine(textX+5+stringWidth,textY+(font.getSize()/2),pointX,pointY);
         }
         g.fillOval(pointX - 2, pointY - 2, 4, 4);
     }
@@ -108,12 +118,21 @@ public class Pointer implements Wireframe{
     public void drawSelectOverlay(Graphics2D g) {
         g.setColor(Color.RED);
         g.fillRect(textX-5,textY-5,10,10);
-        if(pointX < textX+ ((g.getFontMetrics(font).stringWidth(name))/2)){
+
+        int stringWidth = 0;
+        if(name.indexOf("\n") >0){  //Note ignores leading new lines
+            String[] lines = name.split("\n");
+            stringWidth = (g.getFontMetrics(font).stringWidth(lines[0]));
+        }else{
+            stringWidth = (g.getFontMetrics(font).stringWidth(name));
+        }
+
+        if(pointX < textX+ ((stringWidth)/2)){
             //Line going off to left
             g.drawLine(textX-5,textY+(font.getSize()/2),pointX,pointY);
         }else{
             //Line going off to right
-            g.drawLine(textX+5+g.getFontMetrics(font).stringWidth(name),textY+(font.getSize()/2),pointX,pointY);
+            g.drawLine(textX+5+stringWidth,textY+(font.getSize()/2),pointX,pointY);
         }
         g.fillOval(pointX - 2, pointY - 2, 4, 4);
     }
@@ -147,7 +166,7 @@ public class Pointer implements Wireframe{
     @Override
     public String getSaveString() {
         return getTypeOfWireframe() +","+
-                name +","+
+                name.replaceAll("\n","~newline~") +","+     //Make sure to format new lines
                 textX +","+
                 textY +","+
                 pointX +","+
@@ -156,7 +175,7 @@ public class Pointer implements Wireframe{
     }
     public static Pointer makeWireframe(String[] args){
         try{
-            Pointer p = new Pointer(args[1]);
+            Pointer p = new Pointer(args[1].replaceAll("~newline~","\n")); //put the new line characters back in
             int textX = Integer.parseInt(args[2]);
             int textY = Integer.parseInt(args[3]);
             int pointX = Integer.parseInt(args[4]);
