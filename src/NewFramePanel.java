@@ -23,7 +23,7 @@ public class NewFramePanel extends JPanel{
         wireboxButton.setMargin(new Insets(2, 2, 2, 2));
         try {
             //System.out.println("ICON "+R.R.getIcon("wirebox"));
-            wireboxButton.setIcon(R.R.getIcon("wirebox"));
+            wireboxButton.setIcon(R.getIcon("wirebox"));
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             wireboxButton.setText("Wirebox");
@@ -41,7 +41,7 @@ public class NewFramePanel extends JPanel{
         JButton labelButton = new JButton("");
         try {
             //System.out.println("ICON "+R.R.getIcon("wirebox"));
-            labelButton.setIcon(R.R.getIcon("label"));
+            labelButton.setIcon(R.getIcon("label"));
             labelButton.setMargin(new Insets(2, 2, 2, 2));
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -58,7 +58,7 @@ public class NewFramePanel extends JPanel{
         JButton pointerButton = new JButton("");
         try {
             //System.out.println("ICON "+R.R.getIcon("wirebox"));
-            pointerButton.setIcon(R.R.getIcon("pointer"));
+            pointerButton.setIcon(R.getIcon("pointer"));
             pointerButton.setMargin(new Insets(2, 2, 2, 2));
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
