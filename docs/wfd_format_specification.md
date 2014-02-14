@@ -1,5 +1,5 @@
 
-Wire frame designer format specification
+Wire frame Designer format specification
 ------------------------------
 
 

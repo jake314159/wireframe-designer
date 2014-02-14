@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class designer {
+public class Designer {
 
     public static void main(String[] args){
         try {
@@ -8,7 +8,7 @@ public class designer {
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        window w = new window();
+        Window w = new Window();
         w.init();
     }
 

@@ -7,10 +7,10 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 
-public class window extends JFrame{
+public class Window extends JFrame{
 
-    public window(){
-        super("Wire frame designer");
+    public Window(){
+        super("Wire frame Designer");
     }
 
     public void init(){
@@ -75,14 +75,14 @@ public class window extends JFrame{
 
         menuItem = new JMenuItem("Save", KeyEvent.VK_S); //R.R.getIcon("label"));
         menuItem.getAccessibleContext().setAccessibleDescription("Save wireframe");
-        final window thisWindow = this;
+        final Window thisWindow = this;
         final FileDialog fdSave = new FileDialog(this, "Choose a file", FileDialog.SAVE);
         fdSave.setFile("*.wfd");
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 /*System.out.println("SAVE");
-                int returnVal = fc.showSaveDialog(window.this);
+                int returnVal = fc.showSaveDialog(Window.this);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fc.getSelectedFile();
                     //This is where a real application would save the file.
@@ -128,7 +128,7 @@ public class window extends JFrame{
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                /*int returnVal = fc.showOpenDialog(window.this);
+                /*int returnVal = fc.showOpenDialog(Window.this);
 
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fc.getSelectedFile();
@@ -164,7 +164,7 @@ public class window extends JFrame{
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                /*int returnVal = fcImg.showSaveDialog(window.this);
+                /*int returnVal = fcImg.showSaveDialog(Window.this);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fcImg.getSelectedFile();
                     System.out.println("Saving at "+file.getName());

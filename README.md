@@ -1,4 +1,4 @@
-Wireframe designer
+Wireframe Designer
 ===================
 
 A very very basic wireframe design tool.
