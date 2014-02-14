@@ -157,12 +157,14 @@ public class window extends JFrame{
         submenu = new JMenu("Export");
 
         final JFileChooser fcImg = new JFileChooser();
+        final FileDialog fdExport = new FileDialog(this, "Choose a file", FileDialog.SAVE);
+        fdSave.setFile("*.png");
 
         menuItem = new JMenuItem("PNG");
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                int returnVal = fcImg.showSaveDialog(window.this);
+                /*int returnVal = fcImg.showSaveDialog(window.this);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fcImg.getSelectedFile();
                     System.out.println("Saving at "+file.getName());
@@ -171,6 +173,21 @@ public class window extends JFrame{
                         drawPanel.export(file.getAbsolutePath());
                     }else{
                         drawPanel.export(file.getAbsolutePath() + ".png");
+                    }
+                }     */
+                fdExport.setVisible(true);
+                fdExport.toFront();
+                fdExport.repaint();
+                String filename;
+                try{
+                    filename = fdExport.getFiles()[0].getAbsolutePath();
+                }catch(Exception e){return;}
+                if (filename != null){
+                    String ext =  FileUtil.getFileExtension(filename);
+                    if(ext!=null && ext.equals("png")){
+                        drawPanel.export(filename);
+                    }else{
+                        drawPanel.export(filename + ".png");
                     }
                 }
             }

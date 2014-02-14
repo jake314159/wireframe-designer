@@ -22,5 +22,4 @@ public interface Wireframe {
     public String getSaveString();
     public String getFillType();
     public void setFillType(String fillType);
-
 }
