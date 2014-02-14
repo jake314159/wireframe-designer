@@ -16,7 +16,7 @@ public class NewFramePanel extends JPanel{
     public void init(){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.add(new JLabel("Draw options:"));
+        this.add(new JLabel(" "));
 
         JButton wireboxButton = new JButton("");
         //wireboxButton.setSize(50,50);
@@ -72,6 +72,8 @@ public class NewFramePanel extends JPanel{
         });
         this.add(pointerButton);
 
+
+        /* MOVED TO THE MENU
         this.add(new JLabel("Save options:"));
 
         JButton saveButton = new JButton("Save");
@@ -158,6 +160,6 @@ public class NewFramePanel extends JPanel{
             }
         });
         this.add(newButton);
-
+                */
     }
 }
