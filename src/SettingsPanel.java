@@ -9,7 +9,9 @@ public class SettingsPanel extends JPanel{
     private Wireframe wireframe = null;
     private DrawPanel drawPanel;
 
+    private JLabel nameLabel = new JLabel("Name:");
     private JTextField nameTextBox = new JTextField(10);
+    private JTextArea multilineTextEntry = new JTextArea(3,10);
     private JLabel displayNameLabel = new JLabel("Display name:");
     private JCheckBox displayNameCheckbox = new JCheckBox();
     private JComboBox fillList = new JComboBox(Filler.getFillOptions());
@@ -18,7 +20,10 @@ public class SettingsPanel extends JPanel{
     private JLabel sizeLabel = new JLabel("Size:");
     private JTextField fontSizeBox = new JTextField(10);
 
-    private JTextArea multilineTextEntry = new JTextArea(3,10);
+
+
+    private JButton toTopButton = new JButton("Bring to top");
+    private JButton deleteButton = new JButton("Delete");
 
     private Color selectedColor = Color.WHITE;
 
@@ -83,9 +88,7 @@ public class SettingsPanel extends JPanel{
 
     public void init(){
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        this.add(new JLabel("Name: "));
+        this.add(nameLabel);
 
         this.add(nameTextBox);
         nameTextBox.addKeyListener(new KeyListener() {
@@ -180,7 +183,7 @@ public class SettingsPanel extends JPanel{
             }
         });
 
-        JButton toTopButton = new JButton("Bring to top");
+
         toTopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -189,7 +192,7 @@ public class SettingsPanel extends JPanel{
         });
         this.add(toTopButton);
 
-        JButton deleteButton = new JButton("Delete");
+
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -199,7 +202,70 @@ public class SettingsPanel extends JPanel{
         });
         this.add(deleteButton);
 
-        this.add(new JLabel("    ")); //filler
+
+
+        GroupLayout layout = new GroupLayout(this);
+
+        /*private JLabel nameLabel = new JLabel("Name:");
+    private JTextField nameTextBox = new JTextField(10);
+    private JTextArea multilineTextEntry = new JTextArea(3,10);
+    private JLabel displayNameLabel = new JLabel("Display name:");
+    private JCheckBox displayNameCheckbox = new JCheckBox();
+    private JComboBox fillList = new JComboBox(Filler.getFillOptions());
+    private JButton selectFillColorButton = new JButton("Select color");
+
+    private JLabel sizeLabel = new JLabel("Size:");
+    private JTextField fontSizeBox = new JTextField(10);
+
+
+
+    JButton toTopButton = new JButton("Bring to top");
+    JButton deleteButton = new JButton("Delete");
+    */
+
+        layout.setHorizontalGroup(
+                layout.createSequentialGroup()
+                        //.addComponent(c1)
+                       // .addComponent(c2)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(nameLabel)
+                                .addComponent(nameTextBox)
+                                .addComponent(multilineTextEntry)
+                                .addComponent(displayNameLabel)
+
+                                .addComponent(fillList)
+                                .addComponent(selectFillColorButton)
+                                .addComponent(sizeLabel)
+                                .addComponent(fontSizeBox)
+                                .addComponent(toTopButton)
+                                .addComponent(deleteButton)
+                        )
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(displayNameCheckbox)
+                        )
+        );
+        layout.setVerticalGroup(
+                layout.createSequentialGroup()
+                       // .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                      //          .addComponent(c1)
+                      //          .addComponent(c2)
+                      //          .addComponent(c3))
+                        .addComponent(nameLabel)
+                        .addComponent(nameTextBox)
+                        .addComponent(multilineTextEntry)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(displayNameLabel)
+                            .addComponent(displayNameCheckbox) )
+                        .addComponent(fillList)
+                        .addComponent(selectFillColorButton)
+                        .addComponent(sizeLabel)
+                        .addComponent(fontSizeBox)
+                        .addComponent(toTopButton)
+                        .addComponent(deleteButton)
+        );
+
+        //this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(layout);
     }
 
 }
