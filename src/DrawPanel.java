@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-
 public class DrawPanel extends JPanel{
 
     ArrayList<Wireframe> wireFrames;
@@ -33,11 +32,6 @@ public class DrawPanel extends JPanel{
     }
 
     public void init(){
-        wireFrames.add(new Wirebox("Test box 1",10,10,100,100, true));
-        wireFrames.add(new Wirebox("Test box 2",50,50,100,100));
-
-        load("testSave.wfd");
-
         DrawPanelMouseListener listener = new DrawPanelMouseListener();
         addMouseListener(listener);
         addMouseMotionListener(listener);

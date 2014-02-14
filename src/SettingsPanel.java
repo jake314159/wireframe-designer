@@ -205,28 +205,8 @@ public class SettingsPanel extends JPanel{
 
 
         GroupLayout layout = new GroupLayout(this);
-
-        /*private JLabel nameLabel = new JLabel("Name:");
-    private JTextField nameTextBox = new JTextField(10);
-    private JTextArea multilineTextEntry = new JTextArea(3,10);
-    private JLabel displayNameLabel = new JLabel("Display name:");
-    private JCheckBox displayNameCheckbox = new JCheckBox();
-    private JComboBox fillList = new JComboBox(Filler.getFillOptions());
-    private JButton selectFillColorButton = new JButton("Select color");
-
-    private JLabel sizeLabel = new JLabel("Size:");
-    private JTextField fontSizeBox = new JTextField(10);
-
-
-
-    JButton toTopButton = new JButton("Bring to top");
-    JButton deleteButton = new JButton("Delete");
-    */
-
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
-                        //.addComponent(c1)
-                       // .addComponent(c2)
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                 .addComponent(nameLabel)
                                 .addComponent(nameTextBox)
@@ -240,16 +220,13 @@ public class SettingsPanel extends JPanel{
                                 .addComponent(toTopButton)
                                 .addComponent(deleteButton)
                         )
+                        //Things to go in the second col (Must be small so check boxes only
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                 .addComponent(displayNameCheckbox)
                         )
         );
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
-                       // .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                      //          .addComponent(c1)
-                      //          .addComponent(c2)
-                      //          .addComponent(c3))
                         .addComponent(nameLabel)
                         .addComponent(nameTextBox)
                         .addComponent(multilineTextEntry)

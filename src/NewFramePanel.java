@@ -40,7 +40,6 @@ public class NewFramePanel extends JPanel{
 
         JButton labelButton = new JButton("");
         try {
-            //System.out.println("ICON "+R.R.getIcon("wirebox"));
             labelButton.setIcon(R.getIcon("label"));
             labelButton.setMargin(new Insets(2, 2, 2, 2));
         } catch (IOException e) {
@@ -57,7 +56,6 @@ public class NewFramePanel extends JPanel{
 
         JButton pointerButton = new JButton("");
         try {
-            //System.out.println("ICON "+R.R.getIcon("wirebox"));
             pointerButton.setIcon(R.getIcon("pointer"));
             pointerButton.setMargin(new Insets(2, 2, 2, 2));
         } catch (IOException e) {
@@ -71,95 +69,5 @@ public class NewFramePanel extends JPanel{
             }
         });
         this.add(pointerButton);
-
-
-        /* MOVED TO THE MENU
-        this.add(new JLabel("Save options:"));
-
-        JButton saveButton = new JButton("Save");
-        final JFileChooser fc = new JFileChooser();
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                int returnVal = fc.showSaveDialog(NewFramePanel.this);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fc.getSelectedFile();
-                    //This is where a real application would save the file.
-                   // log.append("Saving: " + file.getName() + "." + newline);
-                    //System.out.println("Saving at "+file.getName());
-                    String ext =  FileUtil.getFileExtension(file.getAbsolutePath());
-                    if(ext!=null && ext.equals("wfd")){
-                        drawPanel.save(file.getAbsolutePath());
-                    }else{
-                        drawPanel.save(file.getAbsolutePath()+".wfd");
-                    }
-
-                } else {
-                    //log.append("Save command cancelled by user." + newline);
-                }
-                //log.setCaretPosition(log.getDocument().getLength());
-                //drawPanel.save();
-            }
-        });
-        this.add(saveButton);
-
-        JButton loadButton = new JButton("Load");
-        loadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                int returnVal = fc.showOpenDialog(NewFramePanel.this);
-
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fc.getSelectedFile();
-                    //This is where a real application would open the file.
-                    //log.append("Opening: " + file.getName() + "." + newline);
-                    drawPanel.load(file.getAbsolutePath());
-                } else {
-                    //log.append("Open command cancelled by user." + newline);
-                }
-            }
-        });
-        this.add(loadButton);
-
-        final JFileChooser fcImg = new JFileChooser();
-        JButton exportButton = new JButton("Export");
-        exportButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                int returnVal = fcImg.showSaveDialog(NewFramePanel.this);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fcImg.getSelectedFile();
-                    System.out.println("Saving at "+file.getName());
-                    //drawPanel.export(file.getAbsolutePath() + ".png");
-                    String ext =  FileUtil.getFileExtension(file.getAbsolutePath());
-                    if(ext!=null && ext.equals("png")){
-                        drawPanel.export(file.getAbsolutePath());
-                    }else{
-                        drawPanel.export(file.getAbsolutePath() + ".png");
-                    }
-                } else {
-                    //log.append("Save command cancelled by user." + newline);
-                }
-                //log.setCaretPosition(log.getDocument().getLength());
-                //drawPanel.export();
-            }
-        });
-        this.add(exportButton);
-
-        this.add(new JLabel("WARNING"));
-        this.add(new JLabel("THE NEXT"));
-        this.add(new JLabel("BUTTON"));
-        this.add(new JLabel("WILL DELETE"));
-        this.add(new JLabel("EVERYTHING:"));
-
-        JButton newButton = new JButton("New");
-        newButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                drawPanel.clear();
-            }
-        });
-        this.add(newButton);
-                */
     }
 }

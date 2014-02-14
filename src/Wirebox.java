@@ -1,13 +1,6 @@
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jake
- * Date: 12/02/14
- * Time: 17:21
- * To change this template use File | Settings | File Templates.
- */
 public class Wirebox implements Wireframe {
     private int x;
     private int y;

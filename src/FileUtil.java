@@ -24,7 +24,6 @@ public class FileUtil {
 
             while ((sCurrentLine = br.readLine()) != null) {
                 String[] arr = sCurrentLine.split(",");
-                //System.out.println("The line '" + sCurrentLine + "' is " + arr.length + " long");
                 try{
                     if(arr[0].equals("Wirebox")){
                         array.add(Wirebox.makeWireframe(arr));

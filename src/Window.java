@@ -81,21 +81,6 @@ public class Window extends JFrame{
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                /*System.out.println("SAVE");
-                int returnVal = fc.showSaveDialog(Window.this);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fc.getSelectedFile();
-                    //This is where a real application would save the file.
-                    // log.append("Saving: " + file.getName() + "." + newline);
-                    //System.out.println("Saving at "+file.getName());
-                    String ext =  FileUtil.getFileExtension(file.getAbsolutePath());
-                    if(ext!=null && ext.equals("wfd")){
-                        drawPanel.save(file.getAbsolutePath());
-                    }else{
-                        drawPanel.save(file.getAbsolutePath()+".wfd");
-                    }
-
-                } */
                 fdSave.setVisible(true);
                 fdSave.toFront();
                 fdSave.repaint();
@@ -128,13 +113,6 @@ public class Window extends JFrame{
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                /*int returnVal = fc.showOpenDialog(Window.this);
-
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fc.getSelectedFile();
-                    drawPanel.load(file.getAbsolutePath());
-                } else {
-                }         */
                 fdLoad.setVisible(true);
                 String filename;
                 try{
@@ -148,10 +126,6 @@ public class Window extends JFrame{
         });
         menu.add(menuItem);
 
-        /*menuItem = new JMenuItem("Export", KeyEvent.VK_L); //R.R.getIcon("label"));
-        menuItem.getAccessibleContext().setAccessibleDescription("Export wireframe");
-        menu.add(menuItem);      */
-
 //a submenu
         menu.addSeparator();
         submenu = new JMenu("Export");
@@ -164,17 +138,6 @@ public class Window extends JFrame{
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                /*int returnVal = fcImg.showSaveDialog(Window.this);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fcImg.getSelectedFile();
-                    System.out.println("Saving at "+file.getName());
-                    String ext =  FileUtil.getFileExtension(file.getAbsolutePath());
-                    if(ext!=null && ext.equals("png")){
-                        drawPanel.export(file.getAbsolutePath());
-                    }else{
-                        drawPanel.export(file.getAbsolutePath() + ".png");
-                    }
-                }     */
                 fdExport.setVisible(true);
                 fdExport.toFront();
                 fdExport.repaint();
