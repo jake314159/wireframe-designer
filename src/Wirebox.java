@@ -148,11 +148,6 @@ public class Wirebox implements Wireframe {
 
 
     public static Wirebox makeWireframe(String[] args){
-        //TODO check input is valid
-        for(String s : args){
-            System.out.println("Check#"+s);
-        }
-        System.out.println("##########");
         String name = args[1];
         boolean drawName = true;
         if(args[2].equals("false")) drawName = false;
