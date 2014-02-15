@@ -100,16 +100,6 @@ public class Label implements Wireframe{
     }
 
     @Override
-    public boolean drawName() {
-        return true;  //Must always draw name
-    }
-
-    @Override
-    public void setDrawName(boolean drawName) {
-       //Doesn't matter so lets ignore it
-    }
-
-    @Override
     public String getSaveString() {
         return getTypeOfWireframe() +","+
                 x +","+

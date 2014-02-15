@@ -109,7 +109,6 @@ public class Wirebox implements Wireframe {
         if(drawName){
             g.drawString(getName(), x+5, y+font.getSize());
         }
-
     }
 
     //Draws whatever extra is required to show that this is currently selected
@@ -130,12 +129,10 @@ public class Wirebox implements Wireframe {
         return DrawPanel.NOT_CORNER;
     }
 
-    @Override
     public boolean drawName() {
         return drawName;
     }
 
-    @Override
     public void setDrawName(boolean drawName) {
         this.drawName = drawName;
     }

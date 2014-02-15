@@ -16,8 +16,6 @@ public interface Wireframe {
     public void drawSelectOverlay(Graphics2D g);
     public void mouseDrag(MouseEvent from, MouseEvent too);
     public int isCorner(int x, int y);
-    public boolean drawName();     //is the name being drawn?
-    public void setDrawName(boolean drawName);
 
     public String getSaveString();
     public String getFillType();

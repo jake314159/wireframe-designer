@@ -37,7 +37,7 @@ public class SettingsPanel extends JPanel{
             this.wireframe = null;
             nameTextBox.setText(wireframe.getName());
             multilineTextEntry.setText(wireframe.getName());
-            displayNameCheckbox.setSelected(wireframe.drawName());
+
             for(int i=0; i<Filler.getFillOptions().length; i++){
                 System.out.println("Checking if " + wireframe.getFillType() + " equals " + fillList.getItemAt(i));
                 if(wireframe.getFillType().equals(fillList.getItemAt(i))){
@@ -68,6 +68,15 @@ public class SettingsPanel extends JPanel{
             }else{
                 multilineTextEntry.setVisible(false);
                 nameTextBox.setVisible(true);
+            }
+
+            if(wireframe.getTypeOfWireframe().equals("Wirebox")){
+                displayNameCheckbox.setVisible(true);
+                displayNameLabel.setVisible(true);
+                displayNameCheckbox.setSelected(((Wirebox)wireframe).drawName());
+            }else{
+                displayNameCheckbox.setVisible(false);
+                displayNameLabel.setVisible(false);
             }
 
             this.wireframe = wireframe;
@@ -128,7 +137,8 @@ public class SettingsPanel extends JPanel{
         displayNameCheckbox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                wireframe.setDrawName(displayNameCheckbox.isSelected());
+                if(wireframe.getTypeOfWireframe().equals("Wirebox"))
+                    ((Wirebox)wireframe).setDrawName(displayNameCheckbox.isSelected());
                 if(drawPanel != null) drawPanel.repaint();
             }
         });

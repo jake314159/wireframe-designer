@@ -157,16 +157,6 @@ public class Pointer implements Wireframe{
     }
 
     @Override
-    public boolean drawName() {
-        return true;
-    }
-
-    @Override
-    public void setDrawName(boolean drawName) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public String getSaveString() {
         return getTypeOfWireframe() +","+
                 name.replaceAll("\n","~newline~") +","+     //Make sure to format new lines

@@ -78,7 +78,7 @@ public class Filler {
 
             //Draw Line
             int barY = (height-margin*2)/15;
-            g.setStroke(new BasicStroke(2));
+            g.setStroke(new BasicStroke(DrawPanel.scale));
             g.setColor(Color.LIGHT_GRAY);
             int numOfPoints = 15;
             int stepWidth = (width - margin - margin)/numOfPoints;
@@ -95,20 +95,21 @@ public class Filler {
             //Draw background
             g.setColor(Color.WHITE);
             g.fillRect(x,y,width,height);
+            g.setStroke(new BasicStroke(DrawPanel.scale));
 
             g.setColor(Color.LIGHT_GRAY);
             int margin = height/10;
             int newY = margin;
-            int boxSize = 20;
-            int boxPadding = 10;
+            int boxSize = 20*DrawPanel.scale;
+            int boxPadding = 10*DrawPanel.scale;
             while(newY+boxSize+boxPadding < height){
-                g.drawRect(5+x, newY+y, boxSize, boxSize);
+                g.drawRect(5*DrawPanel.scale+x, newY+y, boxSize, boxSize);
                 newY += boxSize + boxPadding;
             }
         }else if(option.equals("Button list")){
             //Draw background
             g.setColor(Color.WHITE);
-            g.fillRect(x,y,width,height);
+            g.fillRect(x, y, width, height);
             g.setStroke(new BasicStroke(DrawPanel.scale));
 
             g.setColor(Color.GRAY);
