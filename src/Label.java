@@ -136,4 +136,12 @@ public class Label implements Wireframe{
     public void setFillType(String fillType) {
         //Do nothing this makes no sense otherwise
     }
+
+    @Override
+    public Wireframe upscale(int scale) {
+        Label returnLabel = new Label(name);
+        returnLabel.setSize(getSize()*scale);
+        returnLabel.setLocation(x*scale, y*scale);
+        return returnLabel;
+    }
 }

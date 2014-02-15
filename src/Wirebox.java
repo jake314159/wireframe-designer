@@ -10,7 +10,7 @@ public class Wirebox implements Wireframe {
     private boolean drawName = false;
     private String fillType = "None";
 
-    private static int edgeThreshold = 5*DrawPanel.scale;//5;
+    private static int edgeThreshold = 5*DrawPanel.scale;//5;        //TODO This won't change when the scale changes!
     private static int cornerThreshold = 10*DrawPanel.scale;
     private Color lineColor = Color.BLACK;
     private Font font = new Font("Arial", Font.PLAIN, 12*DrawPanel.scale);
@@ -75,6 +75,13 @@ public class Wirebox implements Wireframe {
     }
     public void setFillType(String fillType){
         this.fillType = fillType;
+    }
+
+    @Override
+    public Wireframe upscale(int scale) {
+        Wirebox returnBox = new Wirebox(name, x*scale, y*scale, width*scale, height*scale);
+        font = new Font("Arial", Font.PLAIN, font.getSize()*scale);
+        return returnBox;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
 

@@ -22,4 +22,10 @@ public interface Wireframe {
     public String getSaveString();
     public String getFillType();
     public void setFillType(String fillType);
+
+    /*
+     * Returns a wireframe which has been upscaled by the given amount.
+     * Note some drawing values may still be scaled with DrawPanel.scale
+     */
+    public Wireframe upscale(int scale);
 }

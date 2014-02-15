@@ -7,7 +7,7 @@ public class Pointer implements Wireframe{
     private int textY = 20*DrawPanel.scale;
     private int pointX = 40*DrawPanel.scale;
     private int pointY = 40*DrawPanel.scale;
-    private int threshold = 8*DrawPanel.scale;
+    private int threshold = 8*DrawPanel.scale;     //TODO won't scale as the scale changes
     private Color textColor = Color.BLACK;
     private Font font;
     private int brushWidth = 1*DrawPanel.scale;
@@ -119,7 +119,7 @@ public class Pointer implements Wireframe{
     @Override
     public void drawSelectOverlay(Graphics2D g) {
         g.setColor(Color.RED);
-        g.fillRect(textX-5,textY-5,10,10);
+        g.fillRect(textX - 5, textY - 5, 10, 10);
         g.setStroke(new BasicStroke(brushWidth));
 
         int stringWidth = 0;
@@ -201,5 +201,14 @@ public class Pointer implements Wireframe{
     @Override
     public void setFillType(String fillType) {
         //Fill makes no sense in this context
+    }
+
+    @Override
+    public Wireframe upscale(int scale) {
+        Pointer returnPointer = new Pointer(name);
+        returnPointer.setLocations(textX*scale, textY*scale, pointX*scale, pointY*scale);
+        brushWidth *= scale;
+        setSize(font.getSize()*scale);
+        return returnPointer;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
