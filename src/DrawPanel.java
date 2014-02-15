@@ -28,6 +28,11 @@ public class DrawPanel extends JPanel{
     private MouseEvent exportSelectEnd = null;
     private String exportFile;
 
+    /**
+     * Amount of scale applied to the image.
+     * High = Good quality but slow
+     * Low  = Low  quality but fast
+     */
     public static final int scale = 4;
 
     public DrawPanel(){
