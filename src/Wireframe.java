@@ -6,7 +6,6 @@ public interface Wireframe {
     public String getName();
     public void setName(String name);
     public String getTypeOfWireframe();
-    public Point getTopCorner();
     public int getWidth();
     public int getHeight();
     public boolean onBoarder(int x, int y);
@@ -18,8 +17,6 @@ public interface Wireframe {
     public int isCorner(int x, int y);
 
     public String getSaveString();
-    public String getFillType();
-    public void setFillType(String fillType);
 
     /*
      * Returns a wireframe which has been upscaled by the given amount.

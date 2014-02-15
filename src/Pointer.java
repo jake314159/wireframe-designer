@@ -48,11 +48,6 @@ public class Pointer implements Wireframe{
     }
 
     @Override
-    public Point getTopCorner() {
-        return new Point(textX, textY);
-    }
-
-    @Override
     public int getWidth() {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -181,16 +176,6 @@ public class Pointer implements Wireframe{
             e.printStackTrace();
             return null;
         }
-    }
-
-    @Override
-    public String getFillType() {
-        return "None";  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void setFillType(String fillType) {
-        //Fill makes no sense in this context
     }
 
     public void setBrushWidth(int brushWidth){

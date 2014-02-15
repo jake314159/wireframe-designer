@@ -43,11 +43,6 @@ public class Label implements Wireframe{
     }
 
     @Override
-    public Point getTopCorner() {
-        return new Point(x,y);
-    }
-
-    @Override
     public int getWidth() {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -115,16 +110,6 @@ public class Label implements Wireframe{
         returnLabel.setLocation(x,y);
         returnLabel.setSize(size);
         return returnLabel;
-    }
-
-    @Override
-    public String getFillType() {
-        return "None";  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void setFillType(String fillType) {
-        //Do nothing this makes no sense otherwise
     }
 
     @Override

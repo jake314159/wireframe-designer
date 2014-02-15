@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class Wirebox implements Wireframe {
+public class Wirebox implements Wireframe, Fillable {
     private int x;
     private int y;
     private int width;
@@ -40,11 +40,6 @@ public class Wirebox implements Wireframe {
     @Override
     public String getTypeOfWireframe() {
         return "Wirebox";
-    }
-
-    @Override
-    public Point getTopCorner() {
-        return new Point(x,y);
     }
 
     @Override

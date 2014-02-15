@@ -38,15 +38,6 @@ public class SettingsPanel extends JPanel{
             nameTextBox.setText(wireframe.getName());
             multilineTextEntry.setText(wireframe.getName());
 
-            for(int i=0; i<Filler.getFillOptions().length; i++){
-                System.out.println("Checking if " + wireframe.getFillType() + " equals " + fillList.getItemAt(i));
-                if(wireframe.getFillType().equals(fillList.getItemAt(i))){
-                    fillList.setSelectedIndex(i);
-                    break;
-                }
-                //error option not avalible :/
-                fillList.setSelectedIndex(0);
-            }
             if(wireframe.getTypeOfWireframe().equals("Label")){
                 sizeLabel.setVisible(true);
                 fontSizeBox.setVisible(true);
@@ -77,6 +68,22 @@ public class SettingsPanel extends JPanel{
             }else{
                 displayNameCheckbox.setVisible(false);
                 displayNameLabel.setVisible(false);
+            }
+
+            if(wireframe instanceof Fillable){
+                fillList.setVisible(true);
+                selectFillColorButton.setVisible(true);
+                for(int i=0; i<Filler.getFillOptions().length; i++){
+                    if(((Fillable)wireframe).getFillType().equals(fillList.getItemAt(i))){
+                        fillList.setSelectedIndex(i);
+                        break;
+                    }
+                    //error option not avalible :/
+                    fillList.setSelectedIndex(0);
+                }
+            }else{
+                fillList.setVisible(false);
+                selectFillColorButton.setVisible(false);
             }
 
             this.wireframe = wireframe;
@@ -147,13 +154,13 @@ public class SettingsPanel extends JPanel{
         fillList.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(wireframe!=null){
+                if(wireframe!=null && wireframe instanceof Fillable){
                     String fillType = (String)fillList.getSelectedItem();
                     if(fillType.equals("Fill")){
-                        wireframe.setFillType("Fill"+String.format("#%02x%02x%02x", selectedColor.getRed(),
+                        ((Fillable)wireframe).setFillType("Fill"+String.format("#%02x%02x%02x", selectedColor.getRed(),
                                 selectedColor.getGreen(), selectedColor.getBlue()));
                     }else{
-                        wireframe.setFillType(fillType);
+                        ((Fillable)wireframe).setFillType(fillType);
                     }
                     drawPanel.repaint();
                 }
