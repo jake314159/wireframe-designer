@@ -20,16 +20,18 @@ import java.awt.geom.*;
 public class WobbleStroke implements Stroke {
     private float detail = 2;
     private float amplitude = 2;
+    private int width = 10;
     private static final float FLATNESS = 1;
 
-    public WobbleStroke(float detail, float amplitude ) {
+    public WobbleStroke(int width, float detail, float amplitude ) {
         this.detail	= detail;
         this.amplitude	= amplitude;
+        this.width = width;
     }
 
     public Shape createStrokedShape( Shape shape ) {
         GeneralPath result = new GeneralPath();
-        shape = new BasicStroke( 10 ).createStrokedShape( shape );
+        shape = new BasicStroke( width ).createStrokedShape( shape );
         PathIterator it = new FlatteningPathIterator( shape.getPathIterator( null ), FLATNESS );
         float points[] = new float[6];
         float moveX = 0, moveY = 0;
@@ -84,6 +86,7 @@ public class WobbleStroke implements Stroke {
     }
 
     private float randomize( float x ) {
+        //Should change to be deterministic
         return x+(float)Math.random()*amplitude*2-1;
     }
 

@@ -34,7 +34,7 @@ public class DrawPanel extends JPanel{
      * Low  = Low  quality but fast
      */
     public static int scale = 1;
-    public static StrokeStyle strokeStyle = StrokeStyle.PLAIN;
+    public static StrokeStyle strokeStyle = StrokeStyle.SKETCH;
 
     //How much higher quality the exported image is
     private int exportScale = 6;
