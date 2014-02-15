@@ -3,15 +3,15 @@ import java.awt.event.MouseEvent;
 
 public class Label implements Wireframe{
     private String name;
-    private int x = 10;
-    private int y = 10;
-    private int sensitivity = 10; //How easy to pick up
+    private int x = 10*DrawPanel.scale;
+    private int y = 10*DrawPanel.scale;
+    private int sensitivity = 10*DrawPanel.scale; //How easy to pick up
     private Color textColor = Color.BLACK;
     private Font font;
 
     public Label(String name){
         this.name = name;
-        setSize(22); //sets the default font size
+        setSize(22*DrawPanel.scale); //sets the default font size
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Label implements Wireframe{
         g.setFont(font);
         g.drawString(name, x, y+font.getSize());
         if(!export){
-            g.fillRect(x-5,y-5,10,10);
+            g.fillRect(x-4*DrawPanel.scale,y-4*DrawPanel.scale,8*DrawPanel.scale,8*DrawPanel.scale);
         }
     }
 
@@ -85,13 +85,13 @@ public class Label implements Wireframe{
     @Override
     public void drawSelectOverlay(Graphics2D g) {
         g.setColor(Color.RED);
-        g.fillRect(x-5,y-5,10,10);
+        g.fillRect(x-4*DrawPanel.scale,y-4*DrawPanel.scale,8*DrawPanel.scale,8*DrawPanel.scale);
     }
 
     @Override
     public void mouseDrag(MouseEvent from, MouseEvent too) {
         x = too.getX();
-        y = from.getY();
+        y = too.getY();
     }
 
     @Override

@@ -25,9 +25,11 @@ public class Filler {
             fill("Fill#FFFFFF",x,y,width, height, g);
         }else if(option.equals("Cross")){
             g.setColor(Color.GRAY);
-            g.setStroke(new BasicStroke(4));
-            g.drawLine(x+2,y+2,x+width-2,y+height-2);
-            g.drawLine(x+width-2,y+2,x+2,y+height-2);
+            //line size/2 (just makes it easier as normaly want to be using the half)
+            int lineSize = 4*DrawPanel.scale;
+            g.setStroke(new BasicStroke(lineSize*2));
+            g.drawLine(x+lineSize,y+lineSize,x+width-lineSize,y+height-lineSize);
+            g.drawLine(x+width-lineSize,y+lineSize,x+lineSize,y+height-lineSize);
         }else if(option.equals("Bar chart")){
 
             int margin = width/10;
@@ -48,7 +50,7 @@ public class Filler {
 
             //Draw axis
             g.setColor(Color.GRAY);
-            g.setStroke(new BasicStroke(4));
+            g.setStroke(new BasicStroke(4*DrawPanel.scale));
             g.drawLine((x+margin), y+margin, x+margin, y+height-margin);
             g.drawLine(x+margin, y+height-margin, x+width-margin, y+height-margin);
         }else if(option.equals("Empty axis")){
@@ -62,7 +64,7 @@ public class Filler {
 
             //Draw axis
             g.setColor(Color.GRAY);
-            g.setStroke(new BasicStroke(4));
+            g.setStroke(new BasicStroke(4*DrawPanel.scale));
             g.drawLine((x+margin), y+margin, x+margin, y+height-margin);
             g.drawLine(x+margin, y+height-margin, x+width-margin, y+height-margin);
         }else if(option.equals("Line chart strait")){
@@ -86,7 +88,7 @@ public class Filler {
 
             //Draw axis
             g.setColor(Color.GRAY);
-            g.setStroke(new BasicStroke(4));
+            g.setStroke(new BasicStroke(4*DrawPanel.scale));
             g.drawLine((x+margin), y+margin, x+margin, y+height-margin);
             g.drawLine(x+margin, y+height-margin, x+width-margin, y+height-margin);
         }else if(option.equals("Checkboxes")){
@@ -107,12 +109,13 @@ public class Filler {
             //Draw background
             g.setColor(Color.WHITE);
             g.fillRect(x,y,width,height);
+            g.setStroke(new BasicStroke(DrawPanel.scale));
 
             g.setColor(Color.GRAY);
             int margin = height/10;
             int newY = margin;
-            int boxSize = 20;
-            int boxPadding = 10;
+            int boxSize = 20*DrawPanel.scale;
+            int boxPadding = 10*DrawPanel.scale;
             while(newY+boxSize+boxPadding < height){
                 g.drawRect(boxPadding+x, newY+y, width-boxPadding*2, boxSize);
                 newY += boxSize + boxPadding;
@@ -121,13 +124,15 @@ public class Filler {
             //Draw background
             g.setColor(Color.WHITE);
             g.fillRect(x,y,width,height);
+            g.setStroke(new BasicStroke(DrawPanel.scale));
 
             g.setColor(Color.GRAY);
             int margin = height/10;
+            //margin *= DrawPanel.scale;
             //int newY = margin;
             int newX = margin;
-            int boxSize = 65;
-            int boxPadding = 10;
+            int boxSize = 40*DrawPanel.scale;
+            int boxPadding = 10*DrawPanel.scale;
             while(newX+boxSize+boxPadding < width){
                 g.drawRect(newX+x, margin+y, boxSize, height-(margin*2));
                 newX += boxSize + boxPadding;

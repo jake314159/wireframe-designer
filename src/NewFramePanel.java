@@ -31,7 +31,7 @@ public class NewFramePanel extends JPanel{
         wireboxButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                drawPanel.addWireframe(new Wirebox("New box",10,10,20,20,true));
+                drawPanel.addWireframe(new Wirebox("New box",10*DrawPanel.scale,10*DrawPanel.scale,20*DrawPanel.scale,20*DrawPanel.scale,true));
                 drawPanel.repaint();
             }
         });
