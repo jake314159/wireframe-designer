@@ -203,12 +203,16 @@ public class Pointer implements Wireframe{
         //Fill makes no sense in this context
     }
 
+    public void setBrushWidth(int brushWidth){
+        this.brushWidth = brushWidth;
+    }
+
     @Override
     public Wireframe upscale(int scale) {
         Pointer returnPointer = new Pointer(name);
         returnPointer.setLocations(textX*scale, textY*scale, pointX*scale, pointY*scale);
-        brushWidth *= scale;
-        setSize(font.getSize()*scale);
+        returnPointer.setBrushWidth(brushWidth * scale);
+        returnPointer.setSize(font.getSize()*scale);
         return returnPointer;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

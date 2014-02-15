@@ -33,7 +33,10 @@ public class DrawPanel extends JPanel{
      * High = Good quality but slow
      * Low  = Low  quality but fast
      */
-    public static final int scale = 4;
+    public static int scale = 1;
+
+    //How much higher quality the exported image is
+    private int exportScale = 6;
 
     public DrawPanel(){
         wireFrames = new ArrayList<Wireframe>();
@@ -156,7 +159,8 @@ public class DrawPanel extends JPanel{
                 FileUtil.saveAsImage(wireFrames, exportSelectStart.getX(), exportSelectStart.getY(),
                         me.getX()*scale-exportSelectStart.getX(),
                         me.getY()*scale-exportSelectStart.getY(),
-                        exportFile
+                        exportFile,
+                        exportScale
                         );
                 exportMode = false;
                 exportSelectStart = null;

@@ -41,18 +41,20 @@ public class FileUtil {
     }
 
 
-    public static void saveAsImage(ArrayList<Wireframe> wireframes, int x, int y, int width, int height, String filename){
-        BufferedImage largeImg = new BufferedImage(width+x, height+y, BufferedImage.TYPE_INT_ARGB);
+    public static void saveAsImage(ArrayList<Wireframe> wireframes, int x, int y, int width, int height, String filename, int scale){
+        int oldScale = DrawPanel.scale;
+        DrawPanel.scale = scale;
+        BufferedImage largeImg = new BufferedImage((width+x)*scale, (height+y)*scale, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gLarge = largeImg.createGraphics();
         gLarge.setColor(Color.WHITE);
-        gLarge.fillRect(0,0,width+x,height+y);
+        gLarge.fillRect(0,0,(width+x)*scale,(height+y)*scale);
         for(Wireframe f : wireframes){
-            f.draw(gLarge, true);  //true==exporting (so don't display any markers for the UI)
+            f.upscale(scale).draw(gLarge, true);  //true==exporting (so don't display any markers for the UI)
         }
 
-        BufferedImage imageToSave = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage imageToSave = new BufferedImage(width*scale, height*scale, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gSmall = imageToSave.createGraphics();
-        gSmall.drawImage(largeImg, -x, -y, null);
+        gSmall.drawImage(largeImg, -x*scale, -y*scale, null);
 
         try {
             // retrieve image
@@ -61,6 +63,7 @@ public class FileUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        DrawPanel.scale = oldScale;
 
     }
 
