@@ -4,7 +4,7 @@ import java.util.Random;
 public class Filler {
 
     private static final String[] fillOptions =
-            new String[]{"None","White","Checkboxes","Button list","Button row","Empty axis","Bar chart",
+            new String[]{"None","White","Cross","Checkboxes","Button list","Button row","Empty axis","Bar chart",
                     "Line chart strait","Fill"};
     private static Random rand = new Random();
 
@@ -23,6 +23,11 @@ public class Filler {
             //g.setColor(Color.WHITE);
             //g.fillRect(x,y,width,height);
             fill("Fill#FFFFFF",x,y,width, height, g);
+        }else if(option.equals("Cross")){
+            g.setColor(Color.GRAY);
+            g.setStroke(new BasicStroke(4));
+            g.drawLine(x+2,y+2,x+width-2,y+height-2);
+            g.drawLine(x+width-2,y+2,x+2,y+height-2);
         }else if(option.equals("Bar chart")){
 
             int margin = width/10;
