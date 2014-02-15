@@ -107,11 +107,6 @@ public class Pointer implements Wireframe{
     }
 
     @Override
-    public void draw(Graphics2D g) {
-        draw(g, false);
-    }
-
-    @Override
     public void drawSelectOverlay(Graphics2D g) {
         g.setColor(Color.RED);
         g.fillRect(textX - 5, textY - 5, 10, 10);

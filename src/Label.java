@@ -73,11 +73,6 @@ public class Label implements Wireframe{
     }
 
     @Override
-    public void draw(Graphics2D g) {
-        draw(g,false);
-    }
-
-    @Override
     public void drawSelectOverlay(Graphics2D g) {
         g.setColor(Color.RED);
         g.fillRect(x-4*DrawPanel.scale,y-4*DrawPanel.scale,8*DrawPanel.scale,8*DrawPanel.scale);

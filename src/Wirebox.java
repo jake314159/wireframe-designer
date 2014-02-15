@@ -85,12 +85,6 @@ public class Wirebox implements Wireframe, Fillable {
         return returnBox;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-
-    @Override
-    public void draw(Graphics2D g) {
-        draw(g,false);
-    }
-
     @Override
     public void draw(Graphics2D g, boolean export) {
         Filler.fill(fillType,x,y,width,height,g);

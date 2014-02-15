@@ -11,7 +11,6 @@ public interface Wireframe {
     public boolean onBoarder(int x, int y);
     public boolean contains(int x, int y);
     public void draw(Graphics2D g, boolean export);
-    public void draw(Graphics2D g);
     public void drawSelectOverlay(Graphics2D g);
     public void mouseDrag(MouseEvent from, MouseEvent too);
     public int isCorner(int x, int y);

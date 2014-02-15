@@ -57,7 +57,7 @@ public class DrawPanel extends JPanel{
         g.fillRect(0,0,getWidth()*scale, getHeight()*scale);
         for(Wireframe f : wireFrames){
             //System.out.println("Draw time for "+f.getName());
-            f.draw((Graphics2D) g);
+            f.draw((Graphics2D) g, false);
         }
         if(settingsPanel!=null)
             settingsPanel.addSelectOverlay((Graphics2D)g);
