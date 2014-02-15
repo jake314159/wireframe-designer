@@ -16,12 +16,15 @@ limitations under the License.
 
 import java.awt.*;
 import java.awt.geom.*;
+import java.util.Random;
 
 public class WobbleStroke implements Stroke {
     private float detail = 2;
     private float amplitude = 2;
     private int width = 10;
     private static final float FLATNESS = 1;
+
+    private Random rand = new Random(184);
 
     public WobbleStroke(int width, float detail, float amplitude ) {
         this.detail	= detail;
@@ -87,7 +90,7 @@ public class WobbleStroke implements Stroke {
 
     private float randomize( float x ) {
         //Should change to be deterministic
-        return x+(float)Math.random()*amplitude*2-1;
+        return x+rand.nextFloat()*amplitude*2-1;
     }
 
 }

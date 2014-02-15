@@ -91,7 +91,7 @@ public class Wirebox implements Wireframe, Fillable {
         g.setColor(lineColor);
         g.setFont(font);
         if(DrawPanel.strokeStyle == StrokeStyle.SKETCH){
-            g.setStroke(new WobbleStroke(brushWidth,2f,2f));
+            g.setStroke(new WobbleStroke(brushWidth,0.5f,1f));
         }else{
             g.setStroke(new BasicStroke(brushWidth));
         }
