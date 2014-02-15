@@ -6,7 +6,6 @@ public class Filler {
     private static final String[] fillOptions =
             new String[]{"None","White","Cross","Checkboxes","Button list","Button row","Empty axis","Bar chart",
                     "Line chart strait","Fill"};
-    private static Random rand = new Random();
 
     public static String[] getFillOptions(){
         return fillOptions;
@@ -16,12 +15,10 @@ public class Filler {
         if(option.equals("None")){
             return; //do nothing
         }else if(option.substring(0,4).equals("Fill")){
-            if(option.length() <10) return; //Not compleate
+            if(option.length() <10) return; //Not complete
             g.setColor(Color.decode(option.substring(4,11)));
             g.fillRect(x,y,width,height);
         }else if(option.equals("White")){
-            //g.setColor(Color.WHITE);
-            //g.fillRect(x,y,width,height);
             fill("Fill#FFFFFF",x,y,width, height, g);
         }else if(option.equals("Cross")){
             g.setColor(Color.GRAY);
@@ -32,6 +29,8 @@ public class Filler {
             g.drawLine(x+width-lineSize,y+lineSize,x+lineSize,y+height-lineSize);
         }else if(option.equals("Bar chart")){
 
+            Random r = new Random(377436);   //Fixed seed so graph doesn't move around lots
+
             int margin = width/10;
 
             //Draw background
@@ -39,34 +38,26 @@ public class Filler {
             g.fillRect(x,y,width,height);
 
             //Draw bars
-            int barY = (height-margin*2)/6;
             g.setColor(Color.LIGHT_GRAY);
             int numOfBoxes = 5;
             int boxWidth = (width - margin - margin)/numOfBoxes;
             //System.out.println("box width "+boxWidth+" of "+width);
             for(int i=0; i<numOfBoxes; i++){
-                g.fillRect(x+margin+(i*boxWidth), y+height-(margin)-(barY*(i+1)), boxWidth, (barY*(i+1)));
+                //Height calculation uses float not int (like below) so resizing doesn't make a new looking graph
+                //Math.abs(r.nextInt()%(height-margin*2));
+                int heightRand = (int)(r.nextFloat()*(float)(height-margin*2));
+                g.fillRect(x+margin+(i*boxWidth), y+height-(margin)-heightRand, boxWidth, heightRand);
             }
 
-            //Draw axis
-            g.setColor(Color.GRAY);
-            g.setStroke(new BasicStroke(4*DrawPanel.scale));
-            g.drawLine((x+margin), y+margin, x+margin, y+height-margin);
-            g.drawLine(x+margin, y+height-margin, x+width-margin, y+height-margin);
-        }else if(option.equals("Empty axis")){
+            drawAxis(x,y,width,height,g);
 
-            int margin = width/10;
+        }else if(option.equals("Empty axis")){
 
             //Draw background
             g.setColor(Color.WHITE);
             g.fillRect(x,y,width,height);
+            drawAxis(x,y,width,height,g);
 
-
-            //Draw axis
-            g.setColor(Color.GRAY);
-            g.setStroke(new BasicStroke(4*DrawPanel.scale));
-            g.drawLine((x+margin), y+margin, x+margin, y+height-margin);
-            g.drawLine(x+margin, y+height-margin, x+width-margin, y+height-margin);
         }else if(option.equals("Line chart strait")){
 
             int margin = width/10;
@@ -74,7 +65,6 @@ public class Filler {
             //Draw background
             g.setColor(Color.WHITE);
             g.fillRect(x,y,width,height);
-
 
             //Draw Line
             int barY = (height-margin*2)/15;
@@ -86,11 +76,8 @@ public class Filler {
                 g.drawLine(x+(i*stepWidth)+margin, y+height-(i*barY)-margin, x+((i+1)*stepWidth)+margin, y+height-((i+1)*barY)-margin);
             }
 
-            //Draw axis
-            g.setColor(Color.GRAY);
-            g.setStroke(new BasicStroke(4*DrawPanel.scale));
-            g.drawLine((x+margin), y+margin, x+margin, y+height-margin);
-            g.drawLine(x+margin, y+height-margin, x+width-margin, y+height-margin);
+            drawAxis(x,y,width,height,g);
+
         }else if(option.equals("Checkboxes")){
             //Draw background
             g.setColor(Color.WHITE);
@@ -98,8 +85,7 @@ public class Filler {
             g.setStroke(new BasicStroke(DrawPanel.scale));
 
             g.setColor(Color.LIGHT_GRAY);
-            int margin = height/10;
-            int newY = margin;
+            int newY = height/10;  //Margin
             int boxSize = 20*DrawPanel.scale;
             int boxPadding = 10*DrawPanel.scale;
             while(newY+boxSize+boxPadding < height){
@@ -113,8 +99,7 @@ public class Filler {
             g.setStroke(new BasicStroke(DrawPanel.scale));
 
             g.setColor(Color.GRAY);
-            int margin = height/10;
-            int newY = margin;
+            int newY = height/10;      //Margin
             int boxSize = 20*DrawPanel.scale;
             int boxPadding = 10*DrawPanel.scale;
             while(newY+boxSize+boxPadding < height){
@@ -139,6 +124,15 @@ public class Filler {
                 newX += boxSize + boxPadding;
             }
         }
+    }
+
+    //Draws an axis to the canvas
+    private static void drawAxis(int x, int y, int width, int height, Graphics2D g){
+        int margin = width/10;
+        g.setColor(Color.GRAY);
+        g.setStroke(new BasicStroke(4*DrawPanel.scale));
+        g.drawLine((x+margin), y+margin, x+margin, y+height-margin);
+        g.drawLine(x+margin, y+height-margin, x+width-margin, y+height-margin);
     }
 
 
