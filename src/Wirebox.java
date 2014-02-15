@@ -80,7 +80,7 @@ public class Wirebox implements Wireframe, Fillable {
     public Wireframe upscale(int scale) {
         Wirebox returnBox = new Wirebox(name, x*scale, y*scale, width*scale, height*scale);
         returnBox.setDrawName(drawName);
-        returnBox.setFont(new Font("Arial", Font.PLAIN, font.getSize()*scale));
+        returnBox.setFont(new Font("Arial", Font.PLAIN, (font.getSize()*scale)));
         returnBox.setFillType(fillType);
         return returnBox;  //To change body of implemented methods use File | Settings | File Templates.
     }
