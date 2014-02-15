@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -27,6 +28,13 @@ public class DrawPanel extends JPanel{
     private MouseEvent exportSelectEnd = null;
     private String exportFile;
 
+    /**
+     * Amount of scale applied to the image.
+     * High = Good quality but slow
+     * Low  = Low  quality but fast
+     */
+    public static final int scale = 4;
+
     public DrawPanel(){
         wireFrames = new ArrayList<Wireframe>();
     }
@@ -38,9 +46,12 @@ public class DrawPanel extends JPanel{
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics gScreen){
+        BufferedImage img = new BufferedImage(getWidth()*scale, getHeight()*scale, BufferedImage.TYPE_INT_ARGB);
+        Graphics g = img.getGraphics();
+
         g.setColor(backgroundColor);
-        g.fillRect(0,0,getWidth(), getHeight());
+        g.fillRect(0,0,getWidth()*scale, getHeight()*scale);
         for(Wireframe f : wireFrames){
             //System.out.println("Draw time for "+f.getName());
             f.draw((Graphics2D) g);
@@ -56,6 +67,8 @@ public class DrawPanel extends JPanel{
             );
             //System.out.println("Drag when exporting");
         }
+
+        gScreen.drawImage(img, 0,0, getWidth(), getHeight(), null);
     }
 
     public void addWireframe(Wireframe wirebox) {
@@ -118,16 +131,19 @@ public class DrawPanel extends JPanel{
 
         @Override
         public void mousePressed(MouseEvent me) {
+            MouseEvent me2 = new MouseEvent((Component)me.getSource(), me.getID(), 0l, me.getModifiers(),
+                    me.getX()*scale, me.getY()*scale, me.getClickCount(), me.isPopupTrigger());
             if(exportMode){
-                exportSelectStart = me;
+
+                exportSelectStart = me2;
                 return;
             }
             //System.out.println("Pressed at "+me.getX()+","+me.getY());
             for(Wireframe f : wireFrames){
                 //System.out.println("Is down on boarder "+f.getName()+"?  "+f.onBoarder(me.getX(), me.getY()));
-                if(f.onBoarder(me.getX(), me.getY()) || f.isCorner(me.getX(), me.getY())!=NOT_CORNER){
+                if(f.onBoarder(me.getX()*scale, me.getY()*scale) || f.isCorner(me.getX()*scale, me.getY()*scale)!=NOT_CORNER){
                     interestedFrame = f;
-                    downEvent = me;
+                    downEvent = me2;
                     break;
                 }
             }
@@ -136,9 +152,10 @@ public class DrawPanel extends JPanel{
         @Override
         public void mouseReleased(MouseEvent me) {
             if(exportMode){
+                //Note exportSelectStart has already been scaled
                 FileUtil.saveAsImage(wireFrames, exportSelectStart.getX(), exportSelectStart.getY(),
-                        me.getX()-exportSelectStart.getX(),
-                        me.getY()-exportSelectStart.getY(),
+                        me.getX()*scale-exportSelectStart.getX(),
+                        me.getY()*scale-exportSelectStart.getY(),
                         exportFile
                         );
                 exportMode = false;
@@ -153,16 +170,19 @@ public class DrawPanel extends JPanel{
 
         @Override
         public void mouseDragged(MouseEvent me) {
+            MouseEvent me2 = new MouseEvent((Component)me.getSource(), me.getID(), 0l, me.getModifiers(),
+                    me.getX()*scale, me.getY()*scale, me.getClickCount(), me.isPopupTrigger());
             if(!exportMode){
                 //System.out.println("Released at "+me.getX()+","+me.getY());
                 if(interestedFrame != null){
-                    interestedFrame.mouseDrag(downEvent, me);
+
+                    interestedFrame.mouseDrag(downEvent, me2);
 
                     //interestedFrame = null; //all sorted
-                    downEvent = me;
+                    downEvent = me2;
                 }
             }else{
-                exportSelectEnd = me; //we are in export mode
+                exportSelectEnd = me2; //we are in export mode
             }
             repaint();
         }
@@ -179,7 +199,7 @@ public class DrawPanel extends JPanel{
                 boolean set = false;
                 for(Wireframe f : wireFrames){
                     //System.out.println("Is down on boarder "+f.getName()+"?  "+f.onBoarder(me.getX(), me.getY()));
-                    if(f.onBoarder(me.getX(), me.getY())){
+                    if(f.onBoarder(me.getX()*scale, me.getY()*scale)){
                         settingsPanel.setWireframe(f);
                         set = true;
                         break;

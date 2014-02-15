@@ -3,19 +3,20 @@ import java.awt.event.MouseEvent;
 
 public class Pointer implements Wireframe{
     private String name;
-    private int textX = 20;
-    private int textY = 20;
-    private int pointX = 40;
-    private int pointY = 40;
-    private int threshold = 8;
+    private int textX = 20*DrawPanel.scale;
+    private int textY = 20*DrawPanel.scale;
+    private int pointX = 40*DrawPanel.scale;
+    private int pointY = 40*DrawPanel.scale;
+    private int threshold = 8*DrawPanel.scale;
     private Color textColor = Color.BLACK;
     private Font font;
+    private int brushWidth = 1*DrawPanel.scale;
 
     private boolean selectedText = true; //was the last true edge check for text or the pointer?
 
     public Pointer(String name){
         this.name = name;
-        setSize(14);
+        setSize(14*DrawPanel.scale);
     }
 
     @Override
@@ -85,6 +86,7 @@ public class Pointer implements Wireframe{
     public void draw(Graphics2D g, boolean export) {
         g.setColor(textColor);
         g.setFont(font);
+        g.setStroke(new BasicStroke(brushWidth));
         int stringWidth = 0;
         if(name.indexOf("\n") >0){  //Note ignores leading new lines
             String[] lines = name.split("\n");
@@ -106,7 +108,7 @@ public class Pointer implements Wireframe{
             //Line going off to right
             g.drawLine(textX+5+stringWidth,textY+(font.getSize()/2),pointX,pointY);
         }
-        g.fillOval(pointX - 2, pointY - 2, 4, 4);
+        g.fillOval(pointX - 2*DrawPanel.scale, pointY - 2*DrawPanel.scale, 4*DrawPanel.scale, 4*DrawPanel.scale);
     }
 
     @Override
@@ -118,6 +120,7 @@ public class Pointer implements Wireframe{
     public void drawSelectOverlay(Graphics2D g) {
         g.setColor(Color.RED);
         g.fillRect(textX-5,textY-5,10,10);
+        g.setStroke(new BasicStroke(brushWidth));
 
         int stringWidth = 0;
         if(name.indexOf("\n") >0){  //Note ignores leading new lines
@@ -134,7 +137,7 @@ public class Pointer implements Wireframe{
             //Line going off to right
             g.drawLine(textX+5+stringWidth,textY+(font.getSize()/2),pointX,pointY);
         }
-        g.fillOval(pointX - 2, pointY - 2, 4, 4);
+        g.fillOval(pointX - 2*DrawPanel.scale, pointY - 2*DrawPanel.scale, 4*DrawPanel.scale, 4*DrawPanel.scale);
     }
 
     @Override

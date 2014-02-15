@@ -10,10 +10,11 @@ public class Wirebox implements Wireframe {
     private boolean drawName = false;
     private String fillType = "None";
 
-    private static int edgeThreshold = 5;
-    private static int cornerThreshold = 10;
+    private static int edgeThreshold = 5*DrawPanel.scale;//5;
+    private static int cornerThreshold = 10*DrawPanel.scale;
     private Color lineColor = Color.BLACK;
-    private Font font = new Font("Arial", Font.PLAIN, 12);
+    private Font font = new Font("Arial", Font.PLAIN, 12*DrawPanel.scale);
+    private int brushWidth = DrawPanel.scale;
 
 
     public Wirebox(String name, int x, int y, int width, int height){
@@ -87,13 +88,13 @@ public class Wirebox implements Wireframe {
         Filler.fill(fillType,x,y,width,height,g);
         g.setColor(lineColor);
         g.setFont(font);
-        g.setStroke(new BasicStroke(1));
+        g.setStroke(new BasicStroke(brushWidth));
         g.drawRect(x,y,width, height);
         if(!export){
-            g.fillOval(x + width - 3, y + height - 3, 6, 6);
+            g.fillOval(x + width - 3*DrawPanel.scale, y + height - 3*DrawPanel.scale, 6*DrawPanel.scale, 6*DrawPanel.scale);
         }
         if(drawName){
-            g.drawString(getName(), x+5, y+15);
+            g.drawString(getName(), x+5, y+font.getSize());
         }
 
     }
@@ -101,7 +102,7 @@ public class Wirebox implements Wireframe {
     //Draws whatever extra is required to show that this is currently selected
     public void drawSelectOverlay(Graphics2D g){
         g.setColor(Color.RED);
-        g.setStroke(new BasicStroke(1));
+        g.setStroke(new BasicStroke(brushWidth));
         g.drawRect(x,y,width, height);
     }
 
