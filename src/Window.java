@@ -167,10 +167,48 @@ public class Window extends JFrame{
         menu.getAccessibleContext().setAccessibleDescription("Add new items to the draw panel");
         menuBar.add(menu);
 
+        menuItem = new JMenuItem("Wirebox", KeyEvent.VK_B); //R.R.getIcon("label"));
+        menuItem.getAccessibleContext().setAccessibleDescription("Create wirebox");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                drawPanel.addWireframe(new Wirebox("Wirebox",20,20,20,20));
+            }
+        });
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Label", KeyEvent.VK_L); //R.R.getIcon("label"));
+        menuItem.getAccessibleContext().setAccessibleDescription("Create label");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                drawPanel.addWireframe(new Label("Label"));
+            }
+        });
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Pointer", KeyEvent.VK_P); //R.R.getIcon("label"));
+        menuItem.getAccessibleContext().setAccessibleDescription("Create pointer");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                drawPanel.addWireframe(new Pointer("Pointer"));
+            }
+        });
+        menu.add(menuItem);
+
         menu = new JMenu("Help");
         menu.setMnemonic(KeyEvent.VK_H);
         menu.getAccessibleContext().setAccessibleDescription("Get help");
         menuBar.add(menu);
+
+        menuItem = new JMenuItem("Help", KeyEvent.VK_H); //R.R.getIcon("label"));
+        menuItem.getAccessibleContext().setAccessibleDescription("Help");
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("About", KeyEvent.VK_A); //R.R.getIcon("label"));
+        menuItem.getAccessibleContext().setAccessibleDescription("About");
+        menu.add(menuItem);
 
         return menuBar;
     }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DrawPanel extends JPanel{
 
-    ArrayList<Wireframe> wireFrames;
+    private ArrayList<Wireframe> wireFrames;
 
     private Color backgroundColor = Color.WHITE;
 
