@@ -9,6 +9,8 @@ import java.io.FilenameFilter;
 
 public class Window extends JFrame{
 
+    private AboutWindow aboutWindow = new AboutWindow();
+
     public Window(){
         super("Wire frame Designer");
     }
@@ -172,7 +174,7 @@ public class Window extends JFrame{
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                drawPanel.addWireframe(new Wirebox("Wirebox",20,20,20,20));
+                drawPanel.addWireframe(new Wirebox("Wirebox", 20, 20, 20, 20));
             }
         });
         menu.add(menuItem);
@@ -208,6 +210,12 @@ public class Window extends JFrame{
 
         menuItem = new JMenuItem("About", KeyEvent.VK_A); //R.R.getIcon("label"));
         menuItem.getAccessibleContext().setAccessibleDescription("About");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                aboutWindow.popup();
+            }
+        });
         menu.add(menuItem);
 
         return menuBar;
