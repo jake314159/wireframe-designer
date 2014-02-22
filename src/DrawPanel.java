@@ -4,9 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class DrawPanel extends JPanel{
@@ -37,6 +35,8 @@ public class DrawPanel extends JPanel{
 
     //How much higher quality the exported image is
     private int exportScale = 6;
+
+    private ExportPopup exportPopup = new ExportPopup();
 
     public DrawPanel(){
         wireFrames = new ArrayList<Wireframe>();
@@ -153,20 +153,32 @@ public class DrawPanel extends JPanel{
         }
 
         @Override
-        public void mouseReleased(MouseEvent me) {
+        public void mouseReleased(final MouseEvent me) {
             if(exportMode){
-                //Note exportSelectStart has already been scaled
-                FileUtil.saveAsImage(wireFrames, exportSelectStart.getX(), exportSelectStart.getY(),
-                        me.getX()*scale-exportSelectStart.getX(),
-                        me.getY()*scale-exportSelectStart.getY(),
-                        exportFile,
-                        exportScale
-                        );
-                exportMode = false;
-                exportSelectStart = null;
-                exportSelectEnd = null;
-                exportFile = null;
-                repaint();
+
+                exportPopup.export(me.getX() * scale - exportSelectStart.getX(),
+                        me.getY() * scale - exportSelectStart.getY(),
+                        new Thread(){
+                            public void run(){
+                                FileUtil.saveAsImage(wireFrames, exportSelectStart.getX(), exportSelectStart.getY(),
+                                        me.getX()*scale-exportSelectStart.getX(),
+                                        me.getY()*scale-exportSelectStart.getY(),
+                                        exportFile,
+                                        exportScale
+                                );
+
+                            }
+                        },
+                        new Thread(){
+                            public void run(){
+                                exportMode = false;
+                                exportSelectStart = null;
+                                exportSelectEnd = null;
+                                exportFile = null;
+                                repaint();
+                            }
+                        });
+
             }else{
                 interestedFrame = null; //all sorted
             }
