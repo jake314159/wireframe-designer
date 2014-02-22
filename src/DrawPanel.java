@@ -126,6 +126,13 @@ public class DrawPanel extends JPanel{
         repaint();
     }
 
+    public void setExportScale(int scale){
+        this.exportScale = scale;
+    }
+    public int getExportScale(){
+        return exportScale;
+    }
+
 
     class DrawPanelMouseListener implements MouseListener, MouseMotionListener{
         Wireframe interestedFrame;
@@ -156,17 +163,17 @@ public class DrawPanel extends JPanel{
         public void mouseReleased(final MouseEvent me) {
             if(exportMode){
 
-                exportPopup.export(me.getX() * scale - exportSelectStart.getX(),
+                exportPopup.export(DrawPanel.this,
+                        me.getX() * scale - exportSelectStart.getX(),
                         me.getY() * scale - exportSelectStart.getY(),
                         new Thread(){
-                            public void run(){
+                            public void run() {
                                 FileUtil.saveAsImage(wireFrames, exportSelectStart.getX(), exportSelectStart.getY(),
                                         me.getX()*scale-exportSelectStart.getX(),
                                         me.getY()*scale-exportSelectStart.getY(),
                                         exportFile,
                                         exportScale
                                 );
-
                             }
                         },
                         new Thread(){

@@ -73,7 +73,7 @@ public class ExportPopup extends JFrame{
 
 
 
-    public void export(int width, int height, final Thread exportThread, final Thread tidyThread){
+    public void export(final DrawPanel dp, int width, int height, final Thread exportThread, final Thread tidyThread){
         this.height = height;
         this.width = width;
         this.tidyThread = tidyThread;
@@ -86,25 +86,22 @@ public class ExportPopup extends JFrame{
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                while(chosenScale < 0){
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                    }
-                }
+                setChosenScale();
 
                 //If chose to export then run the export thread object
                 if(chosenScale > 0){
                     new Thread(){
                         public void run(){
+                            dp.setExportScale(chosenScale);
                             exportThread.run();
                             tidyThread.run();
+                            setVisible(false);
                         }
                     }.start();
 
                 }else{
                     tidyThread.run();
+                    setVisible(false);
                 }
             }
         });
@@ -121,5 +118,10 @@ public class ExportPopup extends JFrame{
     private void updateLabel(){
         int scale = scaleDropdown.getSelectedIndex()+1;
         exportResLabel.setText("Export resolution: "+(width*scale)+"x"+(height*scale));
+    }
+
+    private void setChosenScale(){
+        chosenScale = scaleDropdown.getSelectedIndex()+1;
+
     }
 }
