@@ -1,9 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
+
+/*
+ * Not the prettiest of classes i've ever written but it just about gets the job done.
+ * Ideally this should be looked at at a later date, in particular the export(..) method
+ * needs a lot of parameters
+ */
 
 
 public class ExportPopup extends JFrame{
@@ -35,10 +38,10 @@ public class ExportPopup extends JFrame{
         panel.add(exportResLabel);
 
         scaleDropdown.addItem("1 - Low");
-        for(int i=2; i<6; i++){
+        for(int i=2; i<8; i++){
             scaleDropdown.addItem(""+i);
         }
-        scaleDropdown.addItem("7 - High");
+        scaleDropdown.addItem("9 - High");
         scaleDropdown.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent itemEvent) {
@@ -72,7 +75,20 @@ public class ExportPopup extends JFrame{
     }
 
 
-
+    /**
+     * Shows the popup window and sorts out the users scale choices before exporting
+     *
+     * NOTE: Scale is how much larger than the screen resolution it should be exported as so a exportScale of
+     * 2 will make a box which is 100x100 px on the screen 200x200px in the exported image
+     *
+     *
+     * @param dp The draw panel which is making the call (used to set the exportScale)
+     * @param width Width of the export window
+     * @param height Height of the export window
+     * @param exportThread A thread object which if ran will do the export calculation
+     * @param tidyThread A thread object which will tidy up after the user has made their choice
+     *                   Note that even if the user exits this will be run
+     */
     public void export(final DrawPanel dp, int width, int height, final Thread exportThread, final Thread tidyThread){
         this.height = height;
         this.width = width;
@@ -83,6 +99,7 @@ public class ExportPopup extends JFrame{
             confirmButton.removeActionListener( al );
         }
 
+        //Add an action listener which does the export when the user clicks the "export" button
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -107,8 +124,6 @@ public class ExportPopup extends JFrame{
         });
 
         updateLabel();
-
-
 
         this.setSize(300,400);
         this.setVisible(true);
