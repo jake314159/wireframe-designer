@@ -46,8 +46,8 @@ public class ExportPopup extends JFrame{
             @Override
             public void itemStateChanged(ItemEvent itemEvent) {
                 updateLabel();
-                validate();
-                repaint();
+                //validate();
+                //repaint();
             }
         });
 
